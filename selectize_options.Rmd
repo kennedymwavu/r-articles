@@ -114,7 +114,7 @@ tags$style(
       )
 # Alter the max-height to your liking!
 ```
-Note that changes the height of every `selectizeInput` in your app. (Sorry, did you shoot yourself on the foot? Maybe.)
+*Note: That changes the height of every `selectizeInput` in your app. (Sorry, did you shoot yourself on the foot? Maybe.)*
 
 A sample application here would look like this:
 ```{r}
@@ -126,14 +126,11 @@ ui <- fluidPage(
   ), 
   
   selectizeInput(
-    inputId = "defaultSelectizeInput", 
-    label = "Default Selectize Input", 
+    inputId = "shorterSelectizeList", 
+    label = "Shorter height selectize input", 
     choices = LETTERS, 
     selected = LETTERS[1:3], 
-    multiple = TRUE, 
-    options = list(
-      plugins = list("drag_drop", "optgroup_columns")
-    )
+    multiple = TRUE
   )
 )
 
@@ -164,15 +161,12 @@ ui <- dashboardPage(
     ), 
     
     selectizeInput(
-      inputId = "defaultSelectizeInput", 
-      label = "Default Selectize Input", 
-      choices = LETTERS, 
-      selected = LETTERS[1:3], 
-      multiple = TRUE, 
-      options = list(
-        plugins = list("drag_drop", "optgroup_columns")
-      )
-    )
+    inputId = "shorterSelectizeList", 
+    label = "Shorter height selectize input", 
+    choices = LETTERS, 
+    selected = LETTERS[1:3], 
+    multiple = TRUE
+  )
   )
 )
 
@@ -186,7 +180,7 @@ shinyApp(ui, server)
 
 
 ## DRY?
-So far so good, right? Right. You might then ask me, but Mwavu great R programmers like [Hadley Wickham](http://hadley.nz/) emphasize the DRY principle (Don't Repeat Yourself). By setting those options on every `selectizeInput` is kinda wet... Yunno, not dry. (God, ik I'm so funny. Ha. Ha.) How do you avoid that? Simple. Use a function.
+So far so good, right? Right. But Mwavu, great R programmers like [Hadley Wickham](http://hadley.nz/) emphasize the DRY principle (Don't Repeat Yourself). Setting those options on every `selectizeInput` is kinda wet... Yunno, not dry. (God, I'm so funny. Ha. Ha.) How do you avoid that? Simple. Use a function.
 ```{r}
 selectizeOptions <- function(n = NULL) {
   if (!is.null(n)) {
@@ -211,7 +205,7 @@ What does the above function do?
 
 
 How do we use the function in an application? Call it in the `selectizeInput`s you want to customize. 
-I have a small sample app below:
+I have a small reprex app below:
 ```{r}
 library(shiny)
 library(shinydashboard)
@@ -246,8 +240,8 @@ ui <- dashboardPage(
     ), 
     
     selectizeInput(
-      inputId = "defaultSelectizeInput", 
-      label = "Default Selectize Input", 
+      inputId = "steroidSelectizeInput", 
+      label = "selectizeInput on steroids!", 
       choices = LETTERS, 
       selected = LETTERS[1:3], 
       multiple = TRUE, 
@@ -265,5 +259,9 @@ shinyApp(ui, server)
 ```
 
 
+There are other plugins & extensions you can use to further customize your `selectizeInput` but those 3 have proved to be the most useful to me. 
 
+<center>
+![Good time folks](images/untilnexttime.jpg)
+</center>
 
