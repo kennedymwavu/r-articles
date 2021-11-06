@@ -1,0 +1,94 @@
+---
+title: Select Every nth Element From a Vector in R
+author: Mwavu Kennedy
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+    toc: true
+---
+
+
+## Introduction
+I've been using R on a daily basis (literally) precisely for 1 year 6 months 6 days now. One thing I've come to learn is that there are many ways to accomplish most tasks. We as **`useRs`** are usually spoilt for choice.
+
+For some reason about a week ago I needed to subset every second element of a vector. What do I mean?
+```{r}
+one_hundred <- 1:100
+```
+
+I needed to return `2, 4, 6, 8, ...`
+
+Simple enough, right? Right. But what amazed me isn't the simplicity of the question at hand, it was how even as a prolific user of R, the building blocks of the language sometimes slip past me so easily.
+
+Let's go through my thought process:
+
+## seq
+This was definitely at the top of my mind, no doubts at all. So I wrote something like:
+```{r}
+indices <- seq(from = 2, to = 100, by = 2)
+one_hundred[indices]
+```
+
+Pretty good. But... Why do I have to create a vector of indices for that? It's just subsetting even numbers. Why does it feel like I'm typing too much? There must be a better solution.
+
+## mod
+The mod operator `%%` returns the remainder of the division of one number by another. 
+For example, `4 %% 2` would return `0` since:
+$$
+\frac{4}{2} = 2\;remainder\;0
+$$
+and `9 %% 7` would return `2` since:
+$$ 
+\frac{9}{7} = 1\;remainder\;2
+$$
+Back to our main problem: I basically want all indices which are divisible by $2$ *ie.* Leave a remainder of zero. And this is easy because any number divided by $2$ can only leave a remainder of $1$ or $0$.
+
+Taking our vector:
+```{r}
+one_hundred %% 2
+```
+
+$1$\`s and $0$\`s can be coerced into logicals when subsetting. Values where $1$`s occur will be returned if we do:
+```{r}
+one_hundred[as.logical(one_hundred %% 2)]
+```
+
+To turn the $1$s into $0$s we just have to use the `NOT` operator `!`:
+```{r}
+one_hundred[!one_hundred %% 2]
+```
+The `!` operator coerces the numeric `one_hundred %% 2` to a logical vector so we don't have to use `as.logical()` 
+
+Okay, that's a really nice application of my freshman discrete math unit. So at this point I was like:
+
+> "Dude, this is the best solution for this problem. You know I'm kind of an Einstein myself!"
+
+Just to prove to myself that that was the best solution there was I decided to google it. 
+
+
+## Recycling
+Vector recyling is one of my all time favorite things about R. The first time I learnt the concept, it was mindblowing. But this time round, it swept me off my feet completely.
+
+The solution was as simple as this:
+```{r}
+one_hundred[c(FALSE, TRUE)]
+```
+
+Tell me that isn't insane! I know it's simple but for some reason I couldn't figure it out on my own. That's one of the best answers on StackOverflow according to me. 
+
+Why? It's:
+
+- Small.
+In most cases small never equals good performance but this is one of the few cases where what's advertised is what's delivered.
+
+- Simple.
+It's very easy to understand. Straightforward.
+
+- Clean.
+It's not obfuscated. 
+
+It's better in every way compared to my initial trials. It was posted by the user `Sven Hohenstein`. [Link to the answer.](https://stackoverflow.com/a/13462110/16246909)
+
+## Conclusion
+Keep things small. Keep things simple. Keep things clean. Have a single minded focus on the mission. Sounds more like [WhatsApp's engineering culture principles.](https://www.quastor.org/p/how-whatsapp-scaled-to-1-billion)
