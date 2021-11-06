@@ -1,5 +1,5 @@
 ---
-title: Customize Selectize Input
+title: Customize Selectize Input in R Shiny
 author: Mwavu Kennedy
 output:
   prettydoc::html_pretty:
