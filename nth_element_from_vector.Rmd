@@ -1,5 +1,5 @@
 ---
-title: Select Every nth Element From a Vector in R
+title: Subset Every nth Element From a Vector in R
 author: Mwavu Kennedy
 output:
   prettydoc::html_pretty:
@@ -23,17 +23,17 @@ Simple enough, right? Right. But what amazed me isn't the simplicity of the ques
 
 Let's go through my thought process:
 
-## seq
+## Use `seq()`
 This was definitely at the top of my mind, no doubts at all. So I wrote something like:
 ```{r}
 indices <- seq(from = 2, to = 100, by = 2)
 one_hundred[indices]
 ```
 
-Pretty good. But... Why do I have to create a vector of indices for that? It's just subsetting even numbers. Why does it feel like I'm typing too much? There must be a better solution.
+Pretty good. But... Why do I have to create a vector of indices for that? Why does it feel like I'm typing too much? Okay, this `one_hundred[seq(from = 2, to  = 100, by = 2)]` doesn't make it any better, at least as far as I'm concerned. There must be a better solution.
 
-## mod
-The mod operator `%%` returns the remainder of the division of one number by another. 
+## The Modulo Operator `%%`
+The modulo operator `%%` returns the remainder of the division of one number by another. 
 For example, `4 %% 2` would return `0` since:
 $$
 \frac{4}{2} = 2\;remainder\;0
@@ -67,8 +67,8 @@ Okay, that's a really nice application of my freshman discrete math unit. So at 
 Just to prove to myself that that was the best solution there was I decided to google it. 
 
 
-## Recycling
-Vector recyling is one of my all time favorite things about R. The first time I learnt the concept, it was mindblowing. But this time round, it swept me off my feet completely.
+## Recycle Shorter Vectors
+Vector recycling is one of my all time favorite things about R. The first time I learnt the concept, it was mindblowing. But this time round, it swept me off my feet completely.
 
 The solution was as simple as this:
 ```{r}
@@ -90,5 +90,43 @@ It's not obfuscated.
 
 It's better in every way compared to my initial trials. It was posted by the user `Sven Hohenstein`. [Link to the answer.](https://stackoverflow.com/a/13462110/16246909)
 
+> If logical vectors are used for indexing in R, their values are recycled if the index vector is shorter than the vector containing the values.
+
+## Generalization
+Now that we have a the best solution (as far as we know), let's generalize it. 
+
+### $i^{th}$ element
+What if you wanted to subset every 9th element? Repeat `TRUE` & `FALSE` the required number of times:
+```{r}
+# Subset every 9th element:
+one_hundred[c(rep(FALSE, times = 8), TRUE)]
+```
+We repeat `FALSE` $8$ times because we want every $9$th index to be retrieved.
+
+Taking $9$ as our `i`:
+```{r}
+i <- 9
+
+one_hundred[c(rep(FALSE, times = i - 1), TRUE)]
+```
+
+### $(i + n)^{th}$ element
+Extending the above logic, let's assume `i` is $9$ and `n` is $10$. So it's like saying we want to subset every $(9 + 10)^{th} = 19^{th}$ element.
+```{r}
+i <- 9
+n <- 10
+
+# So we repeat FALSE "i + n - 1" times:
+one_hundred[c(rep(FALSE, times = i + n - 1), TRUE)]
+```
+
+
+
 ## Conclusion
 Keep things small. Keep things simple. Keep things clean. Have a single minded focus on the mission. Sounds more like [WhatsApp's engineering culture principles.](https://www.quastor.org/p/how-whatsapp-scaled-to-1-billion)
+
+But at the end of the day it's all a matter of personal preference and what you feel works for you.
+
+Till next time, avoid complicating stuff.
+
+

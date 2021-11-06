@@ -13,7 +13,7 @@
 <meta name="author" content="Mwavu Kennedy" />
 
 
-<title>Select Every nth Element From a Vector in R</title>
+<title>Subset Every nth Element From a Vector in R</title>
 
 <script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
 
@@ -131,7 +131,7 @@ a.sourceLine {
 <div class="col s12 m3">
 <div class="table cover">
 <div class="cover-card table-cell table-middle">
-<span class="author_name">Select Every nth Element From a Vector in R</span>
+<span class="author_name">Subset Every nth Element From a Vector in R</span>
 <span class="author_bio mbm">Mwavu Kennedy</span>
 </div>
 </div>
@@ -143,9 +143,14 @@ a.sourceLine {
 <div id="TOC" class="toc">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#seq">seq</a></li>
-<li><a href="#mod">mod</a></li>
-<li><a href="#recycling">Recycling</a></li>
+<li><a href="#use-seq">Use <code>seq()</code></a></li>
+<li><a href="#the-modulo-operator">The Modulo Operator <code>%%</code></a></li>
+<li><a href="#recycle-shorter-vectors">Recycle Shorter Vectors</a></li>
+<li><a href="#generalization">Generalization</a>
+<ul>
+<li><a href="#ith-element"><span class="math inline">\(i^{th}\)</span> element</a></li>
+<li><a href="#i-nth-element"><span class="math inline">\((i + n)^{th}\)</span> element</a></li>
+</ul></li>
 <li><a href="#conclusion">Conclusion</a></li>
 </ul>
 </div>
@@ -161,19 +166,19 @@ a.sourceLine {
 <p>Simple enough, right? Right. But what amazed me isn’t the simplicity of the question at hand, it was how even as a prolific user of R, the building blocks of the language sometimes slip past me so easily.</p>
 <p>Let’s go through my thought process:</p>
 </div>
-<div id="seq" class="section level2">
-<h2>seq</h2>
+<div id="use-seq" class="section level2">
+<h2>Use <code>seq()</code></h2>
 <p>This was definitely at the top of my mind, no doubts at all. So I wrote something like:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>one_hundred[indices]</span></code></pre></div>
 <pre><code>##  [1]   2   4   6   8  10  12  14  16  18  20  22  24  26  28  30  32  34  36  38
 ## [20]  40  42  44  46  48  50  52  54  56  58  60  62  64  66  68  70  72  74  76
 ## [39]  78  80  82  84  86  88  90  92  94  96  98 100</code></pre>
-<p>Pretty good. But… Why do I have to create a vector of indices for that? It’s just subsetting even numbers. Why does it feel like I’m typing too much? There must be a better solution.</p>
+<p>Pretty good. But… Why do I have to create a vector of indices for that? Why does it feel like I’m typing too much? Okay, this <code>one_hundred[seq(from = 2, to  = 100, by = 2)]</code> doesn’t make it any better, at least as far as I’m concerned. There must be a better solution.</p>
 </div>
-<div id="mod" class="section level2">
-<h2>mod</h2>
-<p>The mod operator <code>%%</code> returns the remainder of the division of one number by another. For example, <code>4 %% 2</code> would return <code>0</code> since: <span class="math display">\[
+<div id="the-modulo-operator" class="section level2">
+<h2>The Modulo Operator <code>%%</code></h2>
+<p>The modulo operator <code>%%</code> returns the remainder of the division of one number by another. For example, <code>4 %% 2</code> would return <code>0</code> since: <span class="math display">\[
 \frac{4}{2} = 2\;remainder\;0
 \]</span> and <code>9 %% 7</code> would return <code>2</code> since: <span class="math display">\[ 
 \frac{9}{7} = 1\;remainder\;2
@@ -199,9 +204,9 @@ a.sourceLine {
 </blockquote>
 <p>Just to prove to myself that that was the best solution there was I decided to google it.</p>
 </div>
-<div id="recycling" class="section level2">
-<h2>Recycling</h2>
-<p>Vector recyling is one of my all time favorite things about R. The first time I learnt the concept, it was mindblowing. But this time round, it swept me off my feet completely.</p>
+<div id="recycle-shorter-vectors" class="section level2">
+<h2>Recycle Shorter Vectors</h2>
+<p>Vector recycling is one of my all time favorite things about R. The first time I learnt the concept, it was mindblowing. But this time round, it swept me off my feet completely.</p>
 <p>The solution was as simple as this:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>one_hundred[<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>)]</span></code></pre></div>
 <pre><code>##  [1]   2   4   6   8  10  12  14  16  18  20  22  24  26  28  30  32  34  36  38
@@ -215,10 +220,42 @@ a.sourceLine {
 <li><p>Clean. It’s not obfuscated.</p></li>
 </ul>
 <p>It’s better in every way compared to my initial trials. It was posted by the user <code>Sven Hohenstein</code>. <a href="https://stackoverflow.com/a/13462110/16246909">Link to the answer.</a></p>
+<blockquote>
+<p>If logical vectors are used for indexing in R, their values are recycled if the index vector is shorter than the vector containing the values.</p>
+</blockquote>
+</div>
+<div id="generalization" class="section level2">
+<h2>Generalization</h2>
+<p>Now that we have a the best solution (as far as we know), let’s generalize it.</p>
+<div id="ith-element" class="section level3">
+<h3><span class="math inline">\(i^{th}\)</span> element</h3>
+<p>What if you wanted to subset every 9th element? Repeat <code>TRUE</code> &amp; <code>FALSE</code> the required number of times:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset every 9th element:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>one_hundred[<span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">FALSE</span>, <span class="at">times =</span> <span class="dv">8</span>), <span class="cn">TRUE</span>)]</span></code></pre></div>
+<pre><code>##  [1]  9 18 27 36 45 54 63 72 81 90 99</code></pre>
+<p>We repeat <code>FALSE</code> <span class="math inline">\(8\)</span> times because we want every <span class="math inline">\(9\)</span>th index to be retrieved.</p>
+<p>Taking <span class="math inline">\(9\)</span> as our <code>i</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>one_hundred[<span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">FALSE</span>, <span class="at">times =</span> i <span class="sc">-</span> <span class="dv">1</span>), <span class="cn">TRUE</span>)]</span></code></pre></div>
+<pre><code>##  [1]  9 18 27 36 45 54 63 72 81 90 99</code></pre>
+</div>
+<div id="i-nth-element" class="section level3">
+<h3><span class="math inline">\((i + n)^{th}\)</span> element</h3>
+<p>Extending the above logic, let’s assume <code>i</code> is <span class="math inline">\(9\)</span> and <code>n</code> is <span class="math inline">\(10\)</span>. So it’s like saying we want to subset every <span class="math inline">\((9 + 10)^{th} = 19^{th}\)</span> element.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># So we repeat FALSE &quot;i + n - 1&quot; times:</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>one_hundred[<span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">FALSE</span>, <span class="at">times =</span> i <span class="sc">+</span> n <span class="sc">-</span> <span class="dv">1</span>), <span class="cn">TRUE</span>)]</span></code></pre></div>
+<pre><code>## [1] 19 38 57 76 95</code></pre>
+</div>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
 <p>Keep things small. Keep things simple. Keep things clean. Have a single minded focus on the mission. Sounds more like <a href="https://www.quastor.org/p/how-whatsapp-scaled-to-1-billion">WhatsApp’s engineering culture principles.</a></p>
+<p>But at the end of the day it’s all a matter of personal preference and what you feel works for you.</p>
+<p>Till next time, avoid complicating stuff.</p>
 </div>
 </article>
 </div>
