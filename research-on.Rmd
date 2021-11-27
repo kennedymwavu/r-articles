@@ -1,0 +1,13 @@
+---
+title: Research On These
+author: Mwavu Kennedy
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+---
+
+## sudo apt-get update
+What does it really do? Update packages? Sequence installed packages?
+
