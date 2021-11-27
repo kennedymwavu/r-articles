@@ -1,0 +1,38 @@
+---
+title: Linux Stuff
+author: Mwavu Kennedy
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+    toc: true
+---
+
+## To & From Root User
+To switch from normal user to root user:
+```
+sudo su -
+```
+
+To switch from root user to normal user:
+```
+su - <username>
+```
+
+For example:
+```
+su - mwavu
+```
+
+`su` is the linux command for *Switch User*.
+
+## mwavu@mwavu-pc
+This is the same as `<user>@<name of pc>`.
+
+That's why there's:
+
+- `postgres@mwavu-pc` when I switch user to postgres.
+- `root@mwavu-pc` when I switch to root user.
+
+
