@@ -49,6 +49,8 @@
 <ul>
 <li><a href="#to-from-root-user">To &amp; From Root User</a></li>
 <li><a href="#mwavumwavu-pc"><span>mwavu@mwavu-pc</span></a></li>
+<li><a href="#sudo-apt-get-update">sudo apt-get update</a></li>
+<li><a href="#sudo-apt-upgrade">sudo apt upgrade</a></li>
 </ul>
 </div>
 </div>
@@ -74,6 +76,20 @@
 <li><code>postgres@mwavu-pc</code> when I switch user to postgres.</li>
 <li><code>root@mwavu-pc</code> when I switch to root user.</li>
 </ul>
+</div>
+<div id="sudo-apt-get-update" class="section level2">
+<h2>sudo apt-get update</h2>
+<p>Checks for available updates of installed packages. It compares the version of the installed packages to the version of the ones in the remote repo.</p>
+<ul>
+<li><code>Hit</code>: No newer version</li>
+<li><code>Ign</code>: Ignore</li>
+<li><code>Get</code>: There’s a newer version</li>
+</ul>
+</div>
+<div id="sudo-apt-upgrade" class="section level2">
+<h2>sudo apt upgrade</h2>
+<p>Run this after <code>sudo apt-get update</code>. It downloads and installs the packages with newer versions.</p>
+<p>What if you run it before <code>sudo apt-get update</code>? Well, there could be a newer version of a package and the system wouldn’t know so it wouldn’t update.</p>
 </div>
     </section>
   </div>

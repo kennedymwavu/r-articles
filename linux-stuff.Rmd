@@ -35,4 +35,16 @@ That's why there's:
 - `postgres@mwavu-pc` when I switch user to postgres.
 - `root@mwavu-pc` when I switch to root user.
 
+## sudo apt-get update
+Checks for available updates of installed packages. It compares the version of the installed packages to the version of the ones in the remote repo.
+
+- `Hit`: No newer version
+- `Ign`: Ignore
+- `Get`: There's a newer version
+
+## sudo apt upgrade
+Run this after `sudo apt-get update`. It downloads and installs the packages with 
+newer versions.
+
+What if you run it before `sudo apt-get update`? Well, there could be a newer version of a  package and the system wouldn't know so it wouldn't update.
 
