@@ -1,0 +1,17 @@
+---
+title: usernames
+author: Mwavu Kennedy
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+---
+
+- pchisq
+- map_dbl
+- seq_len
+- evalexpr
+- seq_along
+- <span style = "color: red">stopifnot</span>
+- tcrossprod
