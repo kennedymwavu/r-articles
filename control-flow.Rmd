@@ -341,6 +341,7 @@ If you find yourself writing the same block of code more than 3 times then you s
 2. **User defined functions**: These are functions defined by the user to perform some specific tasks.
 
 Examples:
+
 - function to add two numbers
 ```{r}
 add <- function(x, y) {
