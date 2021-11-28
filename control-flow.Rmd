@@ -323,15 +323,141 @@ Exercise:
 # Functions
 
 ## What is a function?
+A function is a block of code that performs a specific task.
 
 ## Why use functions?
+Functions are reusable and can be called multiple times. This avoids repetition in code.
+
+**DRY**: Don't Repeat Yourself.
+
+If you find yourself writing the same block of code more than 3 times then you should probably write a function.
 
 ## Examples of functions
+1. **Predefined functions**: These are functions which are built into R and are stored in R's "base" libraries
+- `mean` eg. `mean(1:5)`
+- `sum` eg. `sum(1:5)`
+- `sd` eg. `sd(1:5)`
+
+2. **User defined functions**: These are functions defined by the user to perform some specific tasks.
+
+Examples:
+- function to add two numbers
+```{r}
+add <- function(x, y) {
+  x + y
+}
+
+add(x = 2, y = 3)
+```
+- function to check if a number is even or odd
+```{r}
+is_even <- function(number) {
+  if (number %% 2 == 0) {
+    return(TRUE)
+  }else {
+    return(FALSE)
+  }
+}
+```
+
+```{r}
+print(is_even(50))
+print(is_even(103))
+```
+
 
 ## Function Arguments
+Function arguments are the inputs to a function.
+
+Examples:
+
+- In this function the arguments are `x` and `y`:
+```{r eval = FALSE}
+add <- function(x, y) {
+  x + y
+}
+```
+
+- Here the argument is only one: `number`:
+```{r}
+is_even <- function(number) {
+  if (number %% 2 == 0) {
+    return(TRUE)
+  }else {
+    return(FALSE)
+  }
+}
+```
+
+- Some functions have no arguments:
+```{r}
+say_hello <- function() {
+  return("Hello World!")
+}
+
+say_hello()
+```
 
 ## Function Body
+The function body is what is inside the curly braces after `function(args)`:
+```{r eval=FALSE}
+f <- function(function arguments here) {
+  everything in here is part of the function body
+}
+```
 
-## Function Environment
+## Return Value
+R allows you to choose whether to explicitly define the return value of a function using `return` statement or not to. If you do not call `return` explicitly, the value of the last evaluated expression is returned.
 
-## Further Examples
+- Call `return` explicitly:
+```{r}
+multiply <- function(x, y) {
+  z <- x * y
+  return(z)
+}
+
+multiply(2, 3)
+```
+
+- No call to `return`:
+```{r}
+multiply <- function(x, y) {
+  z <- x * y
+  z
+}
+
+multiply(2, 3)
+```
+
+- Again, no call to `return`:
+```{r}
+multiply <- function(x, y) {
+  z <- x * y
+}
+
+print(multiply(2, 3))
+```
+- Agaaiiinn, no call to `return`:
+```{r}
+multiply <- function(x, y) {
+  x * y
+}
+
+multiply(2, 3)
+```
+
+In some cases you might want your function to have no return value. You'd instruct it to return `NULL`. (Isn't that still a return value? It's like the word "nothing" in English.)
+```{r}
+no_return <- function() {
+  print("I have a return value of NULL!")
+  NULL
+}
+```
+
+```{r}
+output <- no_return()
+print(output)
+```
+
+## Exercise
+
