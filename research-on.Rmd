@@ -8,6 +8,3 @@ output:
     highlight: github
 ---
 
-## sudo apt-get update
-What does it really do? Update packages? Sequence installed packages?
-
