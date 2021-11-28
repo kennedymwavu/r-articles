@@ -4,12 +4,12 @@ author: Mwavu Kennedy
 date: "`r Sys.Date()`"
 output:
   prettydoc::html_pretty:
-    theme: architect
+    theme: hpstr
     highlight: github
     toc: True
 ---
 
-*If you want to learn R you **MUST** type in the examples provided. Don't copy paste code.*
+*If you want to learn any programming language you **MUST** type in the examples provided. Don't copy paste code. You **MUST** find more examples in the internet. The more you practice, the more you understand the concepts and learn faster.*
 
 # Control Flow
 Control flow is the logic that determines the order of execution of your code. 
@@ -199,7 +199,7 @@ Exercise:
 
 *Hint: Use if statements inside the loops*
 
-## ifelse
+# ifelse
 `ifelse` is different from `if else` in R.
 
 The reason I decided to bring it up after loops is because of a very important concept in R programming: vectorization.
