@@ -8,3 +8,6 @@ output:
     highlight: github
 ---
 
+- Modules in shiny
+
+- Increase shiny idle timeout

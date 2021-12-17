@@ -1,0 +1,15 @@
+---
+title: "Monte Carlo Simulations"
+author: "Mwavu Kennedy"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+---
+
+## Introduction
+The name `Monte Carlo` actually refers to a city in Monaco known for its casinos & gambling. 
+In the context of simulations, `"Monte Carlo"` is usually used as a synonym for randomness, like the randomness in gambling.
+
+> `Monte Carlo simulations` are simulations evolving randomly.

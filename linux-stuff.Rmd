@@ -48,3 +48,41 @@ newer versions.
 
 What if you run it before `sudo apt-get update`? Well, there could be a newer version of a  package and the system wouldn't know so it wouldn't update.
 
+## sudo !!
+So many times have I ran a command only to realize I forgot to add `sudo`. I press my up arrow key then home key to add `sudo` to the beginning of the command.
+
+But no more!
+
+Just type: `sudo !!`
+
+`!!` represents the previous command you ran.
+
+## ctrl + r
+Load I've been struggling to re-run my shiny apps in actserv's cloud server. 
+
+To re-run a previous command that you only remember part of, press `ctrl` and `r` at the 
+same time. The terminal changes to a "search engine" for all your previous commands. Now type the part of the command that you remember. It will give you suggestions. Press `ctrl` `r` again to go to the next match. Once you find it press `Enter` to run.
+
+## history
+Running the command `history` in terminal is one of the few cases where what is advertised is what's delivered: It shows your command history.
+
+If you want to rerun a command in your history, you can copy paste. That's fine. Till you learn you can use its number in the history!
+
+To run command number 102 do: `!102`
+
+But not that if you run a command preceded with a space it won't show up in history. Very helpful if you are running sensitive info stuff.
+
+## which
+`which <program>` checks whether `<program>` is installed and returns its path. If it's not installed it doesn't return anything.
+
+## `ctrl` `u`
+So many times have I struggled to press backspace to delete a command on the terminal, letter by letter (since word by word doesn't work there).
+
+`ctrl` `u` deletes everything on that line.
+
+## F11
+Might not be specific to Linux but this allows you to go into complete full screen.
+
+## Increase & Decrease font size
+`ctrl` `shift` `+` increases font size.
+`ctrl` `-` decreases font size.
